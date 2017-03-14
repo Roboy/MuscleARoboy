@@ -1,0 +1,26 @@
+<launch>
+    <!-- the folder needs to exist and include a slash at the end -->
+    <arg name="local_tmp_folder" />
+    <!-- If live is false, the image at local_tmp_folder/sample_frame.jpg will be used as a replacement for every frame. This file is generated after the first live run -->
+    <arg name="live" default="true" />
+    <arg name="input_image_topic" default="/hmd/input_rgb" />
+    <arg name="output_image_topic" default="/hmd/output_rgb" />
+    <!-- direct url to an mjpeg stream is required. append "?x.mjpeg" if the url is not a complete filename, e.g. http://192.168.0.11:8080/video?x.mjpeg -->
+    <arg name="stream_url" default="http://192.168.0.11:8080/video?x.mjpeg" />
+    <arg name="device_resolution_width" default="1920" />
+    <arg name="device_resolution_height" default="1080" />
+
+    <node name="image_publisher" pkg="musclearoboy" type="image_publisher" output="screen" required="true">
+        <param name="local_folder" value="$(arg local_tmp_folder)" />
+        <param name="publisher_topic" value="$(arg input_image_topic)" />
+        <param name="stream_url" value="$(arg stream_url)" />
+        <param name="live" value="$(arg live)" />
+    </node>
+
+    <node name="smartphone_hmd" pkg="musclearoboy" type="smartphone_hmd" output="screen" required="true">
+        <param name="local_folder" value="$(arg local_tmp_folder)" />
+        <param name="subscriber_topic" value="$(arg input_image_topic)" />
+        <param name="publisher_topic" value="$(arg output_image_topic)" />
+        <param name="device_resolution_width" value="$(arg device_resolution_width)" />
+    </node>
+</launch>

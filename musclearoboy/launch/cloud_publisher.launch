@@ -1,0 +1,10 @@
+<launch>
+    <!-- path to the PCD file to be streamed in ROS -->
+    <arg name="pcd_path" />
+    <arg name="cloud_publisher_topic" default="/cloud_pcd" />
+
+    <node name="cloud_publisher" pkg="musclearoboy" type="cloud_publisher" output="screen" required="true">
+        <param name="pcd_path_param" value="$(arg pcd_path)" />
+        <param name="cloud_publisher_topic" value="$(arg cloud_publisher_topic)" />
+    </node>
+</launch>

@@ -1,0 +1,41 @@
+<launch>
+    <arg name="image_output_path" />
+    <arg name="cloud_publisher_topic" default="/cloud_pcd" />
+
+    <arg name="direct_projection" default="false" />
+    <arg name="smoothing" default="1" />
+
+    <arg name="resolution_width" default="640" />
+    <arg name="resolution_height" default="480" />
+    <arg name="roll_stepsize" default="1.5" />
+    <arg name="roll_lowerbound" default="-45" />
+    <arg name="roll_upperbound" default="45" />
+    <arg name="pitch_stepsize" default="6" />
+    <arg name="pitch_lowerbound" default="0" />
+    <arg name="pitch_upperbound" default="360" />
+    <arg name="start_x" default="0" />
+    <arg name="start_y" default="0" />
+    <arg name="start_z" default="2" />
+    <arg name="start_yaw" default="0" />
+
+    <include file="$(find musclearoboy)/launch/cloud_publisher.launch" />
+
+    <node name="virtual_projection" pkg="musclearoboy" type="virtual_projection" output="screen" required="true">
+        <param name="image_output_path" value="$(arg image_output_path)" />
+        <param name="smoothing" value="$(arg smoothing)" />
+        <param name="subscriber_topic" value="$(arg cloud_publisher_topic)" />
+        <param name="direct_projection" value="$(arg direct_projection)" />
+        <param name="resolution_width" value="$(arg resolution_width)" />
+        <param name="resolution_height" value="$(arg resolution_height)" />
+        <param name="roll_stepsize" value="$(arg roll_stepsize)" />
+        <param name="roll_lowerbound" value="$(arg roll_lowerbound)" />
+        <param name="roll_upperbound" value="$(arg roll_upperbound)" />
+        <param name="pitch_stepsize" value="$(arg pitch_stepsize)" />
+        <param name="pitch_lowerbound" value="$(arg pitch_lowerbound)" />
+        <param name="pitch_upperbound" value="$(arg pitch_upperbound)" />
+        <param name="start_x" value="$(arg start_x)" />
+        <param name="start_y" value="$(arg start_y)" />
+        <param name="start_z" value="$(arg start_z)" />
+        <param name="start_yaw" value="$(arg start_yaw)" />
+    </node>
+</launch>
