@@ -34,5 +34,5 @@ target_link_libraries( image_publisher ${catkin_LIBRARIES} )
 add_executable( smartphone_hmd src/smartphone_hmd.cpp )
 target_link_libraries( smartphone_hmd ${catkin_LIBRARIES} )
 
-add_executable( feature_detection src/feature_detection.cpp )
-target_link_libraries( feature_detection ${catkin_LIBRARIES} )
+# add_executable( feature_detection src/feature_detection.cpp )
+# target_link_libraries( feature_detection ${catkin_LIBRARIES} )
