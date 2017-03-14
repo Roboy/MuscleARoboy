@@ -25,10 +25,12 @@ rosrun musclearoboy cloud_publisher _pcd_path:="/home/USERNAME/roboy.pcd"
 ```
 
 ## Launch Files - online part:
-* smartphone_hmd.launch: starts the streaming between smartphone and ros. publishes incoming image on ros topic (parameter), receives modified image from ros topic (parameter), simulates stereo and prepares for streaming back via mjpg-streamer
+* smartphone_hmd.launch: starts the streaming between smartphone and ros. publishes incoming image on ros topic, receives modified image from ros topic, simulates stereo and prepares for streaming back via [mjpg-streamer](https://github.com/jacksonliam/mjpg-streamer) - requires a smartphone in the same wifi using an app like [IP Webcam](https://play.google.com/store/apps/details?id=com.pas.webcam) to stream the camera in the background and an app like [BSPlayer](https://play.google.com/store/apps/details?id=com.bsplayer.bspandroid.free) to view the stream from the PC. Intended to be used with a Google Cardboard.
 
 ## Launch files - offline preparation:
-* openni2_recording.launch: launches the openni2 driver and rosbag record with the appropriate topics
+* openni2_recording.launch: launches the openni2 driver and rosbag record with the appropriate topics - requires an RGB-D camera
 * rtabmap_bag.launch: launches a paused bag file, the dry openni2 driver and RTABMap. After everything loaded, press space while focusing the terminal to start playback of the bag file (needs to be captured with openni2 driver)
 * cloud_publisher.launch: publishes a specified pointcloud for usage in ros. can be viewed e.g. in RVIZ
 * view_generation.launch: includes cloudpublisher.launch and runs the virtualprojection module to generate virtual views of the pointcloud as images in the specified folder
+
+For more details check the https://devanthro.atlassian.net/wiki/display/MAR/MuscleARoboy pages

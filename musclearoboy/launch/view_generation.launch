@@ -1,10 +1,12 @@
 <launch>
+    <!-- always include slashes at the end for folders! -->
     <arg name="image_output_path" />
+    <arg name="pcd_path" />
+
     <arg name="cloud_publisher_topic" default="/cloud_pcd" />
 
     <arg name="direct_projection" default="false" />
     <arg name="smoothing" default="1" />
-
     <arg name="resolution_width" default="640" />
     <arg name="resolution_height" default="480" />
     <arg name="roll_stepsize" default="1.5" />
@@ -18,7 +20,9 @@
     <arg name="start_z" default="2" />
     <arg name="start_yaw" default="0" />
 
-    <include file="$(find musclearoboy)/launch/cloud_publisher.launch" />
+    <include file="$(find musclearoboy)/launch/cloud_publisher.launch">
+        <arg name="pcd_path" value="$(arg pcd_path)" />
+    </include>
 
     <node name="virtual_projection" pkg="musclearoboy" type="virtual_projection" output="screen" required="true">
         <param name="image_output_path" value="$(arg image_output_path)" />
